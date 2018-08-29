@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+	<div>还打呼噜</div>
+	<script>
+		document.addEventListener( "plusready", onPlusReady, false );
+		// 扩展API加载完毕，现在可以正常调用扩展API
+		function onPlusReady() {
+			var w = null;
+			plus.io.requestFileSystem( plus.io.PRIVATE_DOC, function( fs ) {
+				// 可通过fs操作PRIVATE_DOC文件系统 
+				// fs.root是根目录操作对象DirectoryEntry
+				fs.root.getFile('config.txt',{create:true}, function(fileEntry){
+					// Write data to file
+					fileEntry.createWriter( function ( writer ) {
+						w = writer;
+						writer.onwrite = function ( e ) {
+							console.log( "Write data success!" ); 
+						};
+						
+						writer.onwriteend = function ( e ) {
+							console.log( "Writeend abort!" );
+							try{
+								writer.abort(); 
+							}catch(e){
+								//TODO handle the exception
+								console.error('MUI writer abort api not good'+e.name);
+							}
+						};
+						// Write data to the end of file.
+						writer.seek( writer.length );
+						writer.write( "New data!\n" );
+//						w.abort(); 
+					}, function ( e ) {
+						alert( e.message );
+					} );
+//					w.abort();
+				});
+			}, function ( e ) {
+				alert( "Request file system failed: " + e.message );
+			} );
+		}
+	</script>
+</body>
+</html>

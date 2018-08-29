@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script type="text/javascript" src="js/debugout.js"></script>
+	<input type="button" name="saveBtn" id="saveBtn" value="保存" />
+	<body>
+		<script type="text/javascript">
+			var bugout = new debugout();
+			bugout.log("已中奖1：" + new Date());
+			bugout.log("已中奖2：" + new Date());
+			bugout.log("已中奖3：" + new Date());
+			document.getElementById('saveBtn').addEventListener('click',function(){
+				bugout.downloadLog();
+			})
+		</script>
+	</body>
+</html>
