@@ -1,2 +1,4 @@
 # Locallog
 前端js；浏览器端输出log日志txt文件在本机；以及MUI app应用输出log日志txt文件在手机上
+1浏览器直接输出debugout.txt 在下载目录下面
+2MUI可以在手机上搜索config.txt。具体目录可以参考MUI的api介绍，PRIVATE_DOC这个目录常量下可以找到。亲测可行。
